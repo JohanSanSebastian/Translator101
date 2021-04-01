@@ -1,7 +1,6 @@
 ![Language](assets/Translator101.png)
 
 # Translator101
-
 ![Language](https://img.shields.io/github/languages/top/JohanSanSebastian/Translator101)
 ![Size](https://img.shields.io/github/languages/code-size/JohanSanSebastian/Translator101)
 ![Issues](https://img.shields.io/github/issues/JohanSanSebastian/Translator101)
@@ -19,6 +18,19 @@ Translator101 is a discord bot designed to help connect the community by acting 
 
 ## Live Translate feature
 ![Live](https://media.giphy.com/media/nisoS2Z6eoXEhIXrHm/giphy.gif)
+
+## Self-Hosting
+1. You are free to self-host the bot. To self-host the bot just change the name of the bot in `line 20` from `Translator101` to whatever you would like to.
+
+```python
+client.name = 'Translator101' # Change This
+```
+
+2. To run the bot you also need to make a file called `config.py` and make a variable in it called `token` and set it to your bot token.
+
+```python
+token = "Your_Bot_Token" # Add the token here
+```
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
