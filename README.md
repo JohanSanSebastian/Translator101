@@ -9,6 +9,8 @@
 
 Translator101 is a discord bot designed to help connect the community by acting as a bridge between language barriers. It was made using discord.py and has various features like basic translation, live translation etc.
 
+This bot was made as part of a project for LHD : Share 2021.
+
 ## Basic Setup and Help
 ![Setup](https://media.giphy.com/media/iNUg8YByIcve1HJigH/giphy.gif)
 ![Setup](https://media.giphy.com/media/j0LxYSDiReiTMyfG0m/giphy.gif)
