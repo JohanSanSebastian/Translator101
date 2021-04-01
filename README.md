@@ -1,4 +1,4 @@
-![Language](https://imgur.com/a/QQGQy76)
+![Language](assets/Translator101.png)
 
 # Translator101
 
