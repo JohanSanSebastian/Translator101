@@ -11,20 +11,33 @@ import discord
 from config import token
 
 # Setting up bot
-client = commands.Bot(command_prefix='!') # This can be changed to whatever prefix you decide to use for the bot
+
+# This can be changed to whatever prefix you decide to use for the bot
+# (This will reflect everywhere the prefix of the bot is mentioned)
+command_prefix = '/'
+
+client = commands.Bot(command_prefix=command_prefix)
 client.remove_command("help")
+
+client.command_prefix = command_prefix # Setting the prefix of the bot to reflect everywhere it is mentioed
 
 # Setting up translator and other required things for the bot
 translator = google_translator()
 client.enabled = True
-client.name = 'Translator101' # This can be changed according to what you decide to name your bot (This will reflect everywhere the name of the bot is mentioned)
+# This can be changed according to what you decide to name your bot 
+# (This will reflect everywhere the name of the bot is mentioned)
+client.name = 'Translator101'
+
 
 @client.event
 async def on_ready():
-    print(f'Bot connected as {client.user}') # Alert to notify login of bot
-    await client.change_presence(activity=discord.Game('Here to connect the community \n !help')) # Setting Rich presence of the bot
+    print(f'Bot connected as {client.user}')  # Alert to notify login of bot
+    # Setting Rich presence of the bot
+    await client.change_presence(activity=discord.Game(f'Here to connect the community \n {client.command_prefix}help'))
 
 # Command to toggle live-translation ON/OFF
+
+
 @client.command()
 @commands.has_permissions(ban_members=True)
 async def live(ctx):
@@ -75,20 +88,24 @@ async def on_message(message):
             return
 
         text = str(message.content)
-        lang = translator.detect(text) # Detecting the language of the text
+        lang = translator.detect(text)  # Detecting the language of the text
 
-        if "!t" == text.split()[0]:
+        if f"{client.command_prefix}t" == text.split()[0]:
             return
 
         if lang[0] == "en":
             return
         else:
-            msg = translator.translate(str(message.content), lang_tgt='en') # Translating the text to English
+            # Translating the text to English
+            msg = translator.translate(str(message.content), lang_tgt='en')
             embed = discord.Embed(
                 title=msg, description=f"Message in {lang[1]} from {message.author}", color=discord.Color.greyple())
-            await message.channel.send(embed=embed) # Sending the translation as an embed
+            # Sending the translation as an embed
+            await message.channel.send(embed=embed)
 
 # Translation command
+
+
 @client.command()
 async def t(ctx, lang, *, message):
     msg = translator.translate(str(message), lang_tgt=lang)
@@ -97,12 +114,16 @@ async def t(ctx, lang, *, message):
     await ctx.send(embed=embed)
 
 # Error
+
+
 @t.error
 async def t_error(ctx, error):
     if isinstance(error, commands.CommandInvokeError):
         await ctx.send("Invalid language or language not supported")
 
 # Command to check status of live-translation
+
+
 @client.command()
 async def livestatus(ctx):
     status = 'ON'
@@ -115,18 +136,23 @@ async def livestatus(ctx):
     await ctx.send(embed=embed)
 
 # Help command
+
+
 @client.command()
 async def help(ctx):
     embed = discord.Embed(
         title="Help", description=f"All the commands of {client.name}", color=0x1bd3f3)
     embed.set_thumbnail(
         url="https://media.discordapp.net/attachments/785041781472624664/826870778091274320/discord-avatar-512_1.png?width=369&height=369")
-    embed.add_field(name="`!t [language] [text]`",
-                    value="To translate any text to any language     ", inline=True)
+
     embed.add_field(
-        name="`!live`", value="To toggle live-translation ON/OFF", inline=True)
+        name=f"`{client.command_prefix}help`", value="To show the this help command", inline=True)
+    embed.add_field(name=f"`{client.command_prefix}t [language] [text]`",
+                    value="To translate any text to any language", inline=False)
     embed.add_field(
-        name="`!livestatus`", value="To toggle live-translation ON/OFF", inline=False)
+        name=f"`{client.command_prefix}livestatus`", value="To see if live-translation is ON or OFF", inline=False)
+    embed.add_field(
+        name=f"`{client.command_prefix}live`", value="To toggle live-translation ON/OFF", inline=True)
     await ctx.send(embed=embed)
 
 # Running the bot
