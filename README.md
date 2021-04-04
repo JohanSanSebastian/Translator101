@@ -28,13 +28,19 @@ This bot was made as part of a project for LHD : Share 2021.
 pip install -r requirements.txt
 ```
 
-2. You are free to self-host the bot. To self-host the bot just change the name of the bot in `line 20` from `Translator101` to whatever you would like to.
+2. You are free to self-host the bot. To self-host the bot just change the name of the bot in `line 29` from `Translator101` to whatever you would like to.
 
 ```python
 client.name = 'Translator101' # Change This
 ```
 
-3. To run the bot you also need to make a file called `config.py` and make a variable in it called `token` and set it to your bot token.
+3. You can change the prefix of the bot by changing the prefix declared in the `command_prefix` variable in `line 17` to whatever you would like.
+
+```python
+command_prefix = '!' # Change this to your preferred prefix
+```
+
+4. To run the bot you also need to make a file called `config.py` and make a variable in it called `token` and set it to your bot token.
 
 ```python
 token = "Your_Bot_Token" # Add the token here
