@@ -14,7 +14,7 @@ from config import token
 
 # This can be changed to whatever prefix you decide to use for the bot
 # (This will reflect everywhere the prefix of the bot is mentioned)
-command_prefix = '/'
+command_prefix = '!'
 
 client = commands.Bot(command_prefix=command_prefix)
 client.remove_command("help")
@@ -24,6 +24,7 @@ client.command_prefix = command_prefix # Setting the prefix of the bot to reflec
 # Setting up translator and other required things for the bot
 translator = google_translator()
 client.enabled = True
+
 # This can be changed according to what you decide to name your bot 
 # (This will reflect everywhere the name of the bot is mentioned)
 client.name = 'Translator101'
